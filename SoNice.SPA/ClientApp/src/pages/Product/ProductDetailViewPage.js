@@ -37,7 +37,8 @@ function ProductDetailViewPage() {
             name: data.name,
             price: data.price,
             id: data.id,
-            image: data.image
+            image: data.image,
+            category: data.category
         }
         currentshoppingbasket.push(newitem);
         setShoppingBasket(currentshoppingbasket);

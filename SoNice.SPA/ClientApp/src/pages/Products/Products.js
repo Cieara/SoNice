@@ -27,6 +27,7 @@ function Products() {
     useEffect(() => {
         const fetchData = async () => {
             var result = await getProductsWithCategories();
+            console.log(result)
 
             setData(result);
             setSearchData(result.products)
@@ -38,6 +39,15 @@ function Products() {
     }, []);
     const handlechangecategory = (event) => {
         var category = event.target.value;
+        const newdatafilter = data.products.filter(product => product.category == category);
+        if (newdatafilter.length > 0) {
+            setSearchData(newdatafilter)
+        } else {
+            setSearchData(data.products)
+        }
+
+    }
+    const handlechangebrowsecategory = (category) => {
         const newdatafilter = data.products.filter(product => product.category == category);
         if (newdatafilter.length > 0) {
             setSearchData(newdatafilter)
@@ -86,15 +96,16 @@ function Products() {
                 <li className="list-group-item d-none d-lg-block">
                     <h5 className="mt-1 mb-2">Browse</h5>
                     <div className="d-flex flex-wrap my-2">
-                        {data.categories.map((v, i) => {
+                        {data.categories.map((category, i) => {
                             return (
                                 <Link
                                     key={i}
                                     to="/products"
                                     className="btn btn-sm btn-outline-dark rounded-pill me-2 mb-2"
                                     replace
+                                    onClick={() => handlechangebrowsecategory(category) }
                                 >
-                                    {v}
+                                    {category}
                                 </Link>
                             );
                         })}
@@ -242,11 +253,11 @@ function Products() {
                             {searchData && searchData.map((item, i) => {
                                 if (viewType.grid) {
                                     return (
-                                        <Product key={i} price={item.price} id={item.id} name={item.name} image={item.image} percentOff={i % 2 === 0 ? 15 : null} />
+                                        <Product key={i} price={item.price} id={item.id} name={item.name} image={item.image} percentOff={i % 2 === 0 ? 15 : null} category={item.category} />
                                     );
                                 }
                                 return (
-                                    <ProductH key={i} price={item.price} id={item.id} name={item.name} image={item.image} percentOff={i % 2 === 0 ? 15 : null} />
+                                    <ProductH key={i} price={item.price} id={item.id} name={item.name} image={item.image} percentOff={i % 2 === 0 ? 15 : null} category={item.category} />
                                 );
                             })}
 
