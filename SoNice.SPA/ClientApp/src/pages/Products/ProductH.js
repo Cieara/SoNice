@@ -16,6 +16,7 @@ function ProductH(props) {
   let offPrice = `£${price}`;
   let name = props.name;  
   let route = "/productdetail/" + props.id;
+  let category = props.category;
 
   const handleAddToCart=(e)=>
   {
@@ -24,7 +25,8 @@ function ProductH(props) {
         name:name,
         price:price,
         id:props.id,
-        image:props.image
+        image:props.image,
+        category:category
       }
       currentshoppingbasket.push(newitem);
       setShoppingBasket(currentshoppingbasket);

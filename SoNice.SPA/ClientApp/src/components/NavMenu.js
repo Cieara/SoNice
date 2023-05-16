@@ -11,19 +11,17 @@ import { isConstructorDeclaration } from 'typescript';
 const NavMenu = () => {
   const [collapsed, setCollapsed] = useState(true);
   const { shoppingBasket } = useContext(SoNiceContext);
-  const {items,setItems}= useState(0);
+  const [items,setItems]= useState(0);
 
    useEffect(() => {
     console.log(shoppingBasket.length)
     
-     if (shoppingBasket.length!=items)
-    {
-         for(var i=0;i<shoppingBasket.length;i++)
-         {
-           setItems(i+1);
-         }
-     }
-  }, [shoppingBasket]);
+   
+     
+           setItems(shoppingBasket.length);
+         
+     
+  }, [items]);
 
   const toggleNavbar = () => {
     setCollapsed(!collapsed);
